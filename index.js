@@ -5,14 +5,14 @@ const authRouter = require("./routes/authRoutes");
 const mongoose = require("mongoose");
 
 const PORT = process.env.PORT;
-
+app.use(express.json())
 app.use(authRouter);
 
 app.get("/", (request, response) => {
   // Route Define
   response.send("Hello");
 });
-mongoose.connect(process.env.DBURL);
+
 
 const connectDB = async () => {
   try {
