@@ -2,11 +2,15 @@ const express = require("express"); // import
 require("dotenv").config();
 const app = express(); // initialize
 const authRouter = require("./routes/authRoutes");
+const categoryRouter = require("./routes/categoryRoutes")
+const productRouter = require("./routes/productRoutes")
 const mongoose = require("mongoose");
 
 const PORT = process.env.PORT;
 app.use(express.json())
 app.use(authRouter);
+app.use(productRouter);
+app.use(categoryRouter)
 
 app.get("/", (request, response) => {
   // Route Define
