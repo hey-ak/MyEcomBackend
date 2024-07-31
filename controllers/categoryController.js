@@ -42,4 +42,55 @@ const getCategories = async (request, response) => {
     }
   };
 
-module.exports = { addCategory , getCategories };
+  const deleteCategory = async (request, response) => {
+    try {
+      const { id } = request.params;
+      const deletedCategory = await Category.findByIdAndDelete(id);
+      
+      if (!deletedCategory) {
+        return response.json({
+          msg: "Category Not Found",
+          error: true,
+        });
+      }
+  
+      return response.json({
+        msg: "Category Deleted Successfully",
+        error: false,
+      });
+    } catch (error) {
+      return response.json({
+        msg: "Unable to Delete Category",
+        error: true,
+      });
+    }
+  };
+  
+  const updateCategory = async (request, response) => {
+    try {
+      const { id } = request.params;
+      const { name } = request.body;
+      const updatedCategory = await Category.findByIdAndUpdate(id, { name }, { new: true });
+      
+      if (!updatedCategory) {
+        return response.json({
+          msg: "Category Not Found",
+          error: true,
+        });
+      }
+  
+      return response.json({
+        msg: "Category Updated Successfully",
+        error: false,
+        category: updatedCategory,
+      });
+    } catch (error) {
+      return response.json({
+        msg: "Unable to Update Category",
+        error: true,
+      });
+    }
+  };
+  
+
+module.exports = { addCategory , getCategories , updateCategory , deleteCategory };

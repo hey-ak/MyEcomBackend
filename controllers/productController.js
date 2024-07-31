@@ -83,9 +83,42 @@ const deleteProduct = async (request, response) => {
   }
 };
 
+const updateProduct = async (request, response) => {
+  const { productId } = request.params;
+  const updatedData = request.body;
+
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(
+      productId,
+      updatedData,
+      { new: true }
+    );
+
+    if (!updatedProduct) {
+      return response.json({
+        msg: "Product Not Found",
+        error: true,
+      });
+    }
+
+    return response.json({
+      msg: "Product Updated",
+      error: false,
+      product: updatedProduct,
+    });
+  } catch (error) {
+    return response.json({
+      msg: "Something Went Wrong",
+      error: true,
+    });
+  }
+};
+
+
 module.exports = {
   getProducts,
   addProducts,
   getProductsByCategory,
   deleteProduct,
+  updateProduct
 };
