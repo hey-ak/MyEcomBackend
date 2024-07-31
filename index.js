@@ -4,6 +4,7 @@ const app = express(); // initialize
 const authRouter = require("./routes/authRoutes");
 const categoryRouter = require("./routes/categoryRoutes")
 const productRouter = require("./routes/productRoutes")
+const orderRouter = require("./routes/orderRoutes")
 const mongoose = require("mongoose");
 
 const PORT = process.env.PORT;
@@ -11,6 +12,7 @@ app.use(express.json())
 app.use(authRouter);
 app.use(productRouter);
 app.use(categoryRouter)
+app.use(orderRouter)
 
 app.get("/", (request, response) => {
   // Route Define
