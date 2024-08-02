@@ -6,6 +6,7 @@ const categoryRouter = require("./routes/categoryRoutes")
 const productRouter = require("./routes/productRoutes")
 const orderRouter = require("./routes/orderRoutes")
 const reviewRouter = require("./routes/reviewRoutes")
+const userRouter = require("./routes/userRoutes")
 const mongoose = require("mongoose");
 
 const PORT = process.env.PORT;
@@ -15,6 +16,7 @@ app.use(productRouter);
 app.use(categoryRouter);
 app.use(orderRouter);
 app.use(reviewRouter);
+app.use(userRouter);
 
 app.get("/", (request, response) => {
   // Route Define
