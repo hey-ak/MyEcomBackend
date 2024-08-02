@@ -7,6 +7,7 @@ const productRouter = require("./routes/productRoutes")
 const orderRouter = require("./routes/orderRoutes")
 const reviewRouter = require("./routes/reviewRoutes")
 const userRouter = require("./routes/userRoutes")
+const auth = require("./middleware/auth")
 const mongoose = require("mongoose");
 
 const PORT = process.env.PORT;

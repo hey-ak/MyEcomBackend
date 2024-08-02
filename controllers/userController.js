@@ -1,7 +1,7 @@
 const { response } = require("express");
 const User = require("../models/user");
 
-const getUsers = async (request,response) => {
+const getUsers = async (request,response,auth) => {
   try {
     const users = await User.find({});
 
@@ -28,7 +28,7 @@ const getUsers = async (request,response) => {
 };
 const getCurrentUserDetails = async (request,response) => {
   try {
-    const {userId:userid} = request.params
+    const userid = request.user._id
     const users = await User.findById(userid);
 
     if (users.length === 0) {
@@ -53,7 +53,7 @@ const getCurrentUserDetails = async (request,response) => {
   }
 };
 
-const addUser = async (req, res) => {
+const addUser = async (req,auth, res) => {
   try {
     const newUser = new User(req.body);
     await newUser.save();
@@ -74,7 +74,7 @@ const addUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const userId  = req.user._id;
     const updatedUser = await User.findByIdAndUpdate(userId, req.body, {
       new: true,
     });

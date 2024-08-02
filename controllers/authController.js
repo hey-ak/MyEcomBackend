@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const jwt = require("jsonwebtoken");
 
 
 const login = async (request, response) => {
@@ -21,13 +22,16 @@ const login = async (request, response) => {
         error:true
       });
     }
+    const token = jwt.sign({user},process.env.JWT_SECRET);
 
     return response.json({
         msg:"Login Successfull",
+        token,
         error:false
 
     });
   } catch (error) {
+    console.log(error);
     return response.json({
         msg:"Something Went Wrong",
         error:true
